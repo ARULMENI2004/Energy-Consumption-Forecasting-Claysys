@@ -1,0 +1,6 @@
+{
+  "name": "Energy Consumption Forecasting",
+  "description": "Predict future energy usage based on historical consumption data using time series analysis, aiding energy management. Interactive charts, customizable range filtering, user authentication, and AI-powered forecasting insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

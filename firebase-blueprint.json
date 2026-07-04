@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with personal energy savings goals",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique user ID" },
+        "email": { "type": "string", "description": "The user's registered email" },
+        "displayName": { "type": "string", "description": "Display name" },
+        "savingsGoal": { "type": "number", "description": "Target monthly energy limit in kWh" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of registration" }
+      },
+      "required": ["uid", "email", "createdAt"]
+    },
+    "SavedReport": {
+      "title": "SavedReport",
+      "description": "A saved efficiency and analytic report created by the user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The ID of the user who owns this report" },
+        "title": { "type": "string", "description": "The user-assigned title" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of creation" },
+        "dateRangeStart": { "type": "string", "description": "ISO start timestamp for the audited range" },
+        "dateRangeEnd": { "type": "string", "description": "ISO end timestamp for the audited range" },
+        "notes": { "type": "string", "description": "Personal remarks and notes" },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "totalConsumption": { "type": "number" },
+            "peakDemand": { "type": "number" },
+            "peakHour": { "type": "number" },
+            "averageVoltage": { "type": "number" },
+            "co2Footprint": { "type": "number" },
+            "estimatedCost": { "type": "number" },
+            "efficiencyGain": { "type": "number" }
+          },
+          "required": [
+            "totalConsumption",
+            "peakDemand",
+            "peakHour",
+            "averageVoltage",
+            "co2Footprint",
+            "estimatedCost",
+            "efficiencyGain"
+          ]
+        }
+      },
+      "required": ["userId", "title", "createdAt", "dateRangeStart", "dateRangeEnd", "notes", "metrics"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Authorized user profiles mapping"
+    },
+    "/reports/{reportId}": {
+      "schema": "SavedReport",
+      "description": "User-generated performance reports"
+    }
+  }
+}
